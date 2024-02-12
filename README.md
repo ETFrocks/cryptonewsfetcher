@@ -1,6 +1,6 @@
 # Crypto News Fetcher
 
-This is a simple bash script that fetches the latest news about cryptocurrencies from different sources using their APIs and displays them in the terminal. The script fetches 3 latest news about Bitcoin, Coinbase, US Dollar, Ethereum, Uniswap from each API.
+This is a bash script that fetches the latest news about cryptocurrencies, stocks, and forex from different sources using their APIs and displays them in the terminal. The script fetches 3 latest news about the given keyword from each API.
 
 ## Getting Started
 
@@ -62,10 +62,10 @@ Once you have obtained your API keys and added them to the `.env` file, your app
 
 ### Usage
 
-Run the script:
+Run the script with a keyword (optional, will use bitcoin if none is provided):
 
 ```
-./fetch_news.sh
+./fetch_news.sh keyword
 ```
 
 To display help:
@@ -73,6 +73,8 @@ To display help:
 ```
 ./fetch_news.sh -h
 ```
+
+If no keyword is provided, the script fetches news about "bitcoin", "ethereum", "uniswap", "coinbase", and "usd".
 
 ## Built With
 
@@ -97,3 +99,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * A big thank you to all the creators and contributors of open-source software. Your work has made a significant impact on the world of technology.
 
 Please note that the dates mentioned are for the initial releases of these tools and platforms.
+
