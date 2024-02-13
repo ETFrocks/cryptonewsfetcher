@@ -4,12 +4,16 @@
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Load API keys from .env file
-source $BASE_DIR/.env_private
+source $BASE_DIR/.env
 
 # Define a list of crypto keywords
-declare -A CRYPTO_KEYWORDS=(["bitcoin"]="btc" ["ethereum"]="eth" ["uniswap"]="uni" ["btc"]="btc" ["eth"]="eth" ["uni"]="uni")
-declare -A STOCKS_KEYWORDS=(["coinbase"]="coin" ["paypal"]="pypl" ["coin"]="coin" ["pypl"]="pypl")
-FOREX_KEYWORDS=("eur" "usd" "jpy" "chf")
+declare -A CRYPTO_KEYWORDS=(["bitcoin"]="btc" ["ethereum"]="eth" ["uniswap"]="uni" ["ripple"]="xrp" ["cardano"]="ada" ["polkadot"]="dot" ["litecoin"]="ltc" ["chainlink"]="link" ["bitcoin cash"]="bch" ["stellar"]="xlm" ["usd coin"]="usdc" ["wrapped bitcoin"]="wbtc" ["aave"]="aave" ["cosmos"]="atom" ["monero"]="xmr" ["eos"]="eos" ["tron"]="trx" ["tezos"]="xtz" ["neo"]="neo" ["nem"]="xem" ["btc"]="btc" ["eth"]="eth" ["uni"]="uni" ["xrp"]="xrp" ["ada"]="ada" ["dot"]="dot" ["ltc"]="ltc" ["link"]="link" ["bch"]="bch" ["xlm"]="xlm" ["usdc"]="usdc" ["wbtc"]="wbtc" ["aave"]="aave" ["atom"]="atom" ["xmr"]="xmr" ["eos"]="eos" ["trx"]="trx" ["xtz"]="xtz" ["neo"]="neo" ["xem"]="xem")
+
+# Define a list of stocks keywords
+declare -A STOCKS_KEYWORDS=(["coinbase"]="coin" ["paypal"]="pypl" ["microsoft"]="msft" ["apple"]="aapl" ["amazon"]="amzn" ["google"]="googl" ["facebook"]="fb" ["tesla"]="tsla" ["nvidia"]="nvda" ["adobe"]="adbe" ["netflix"]="nflx" ["intel"]="intc" ["cisco"]="csco" ["oracle"]="orcl" ["ibm"]="ibm" ["salesforce"]="crm" ["zoom"]="zm" ["shopify"]="shop" ["uber"]="uber" ["lyft"]="lyft" ["slack"]="work" ["twitter"]="twtr" ["square"]="sq" ["atlassian"]="team" ["servicenow"]="now" ["splunk"]="splk" ["fortinet"]="ftnt" ["akamai"]="akam" ["coin"]="coin" ["pypl"]="pypl" ["msft"]="msft" ["aapl"]="aapl" ["amzn"]="amzn" ["googl"]="googl" ["fb"]="fb" ["tsla"]="tsla" ["nvda"]="nvda" ["adbe"]="adbe" ["nflx"]="nflx" ["intc"]="intc" ["csco"]="csco" ["orcl"]="orcl" ["ibm"]="ibm" ["crm"]="crm" ["zm"]="zm" ["shop"]="shop" ["uber"]="uber" ["lyft"]="lyft" ["work"]="work" ["twtr"]="twtr" ["sq"]="sq" ["team"]="team" ["now"]="now" ["splk"]="splk" ["ftnt"]="ftnt" ["akam"]="akam")
+
+# Define a list of forex keywords
+FOREX_KEYWORDS=("eur" "usd" "jpy" "chf" "gbp" "aud" "cad" "nzd" "sek" "nok" "mxn" "sgd" "hkd" "krw" "try" "rub" "inr" "brl" "zar" "myr" "idr" "thb" "vnd" "php" "egp" "clp" "cop" "ars" "pkr" "bdt")
 
 # Function to display usage
 usage() {
