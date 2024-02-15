@@ -76,6 +76,10 @@ To display help:
 
 If no keyword is provided, the script fetches news about "bitcoin", "ethereum", "uniswap", "coinbase", and "usd".
 
+The script now supports multiple keywords and logical operators. You can use `-or` and `-and` to combine keywords. For example, `./fetch_news.sh bitcoin -or ethereum` will fetch news about either bitcoin or ethereum. `./fetch_news.sh bitcoin -and ethereum` will fetch news about both bitcoin and ethereum.
+
+You can also set the script to run at regular intervals using the `--run=` option followed by the interval in seconds. For example, `./fetch_news.sh --run=3600` will run the script every hour.
+
 ## Built With
 
 * [Bash](https://www.gnu.org/software/bash/) - The scripting language used
@@ -99,4 +103,3 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * A big thank you to all the creators and contributors of open-source software. Your work has made a significant impact on the world of technology.
 
 Please note that the dates mentioned are for the initial releases of these tools and platforms.
-
