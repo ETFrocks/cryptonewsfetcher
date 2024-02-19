@@ -8,7 +8,7 @@ declare -A STOCKS_KEYWORDS=(["coinbase"]="coin" ["paypal"]="pypl" ["microsoft"]=
 FOREX_KEYWORDS=("eur" "usd" "jpy" "chf" "gbp" "aud" "cad" "nzd" "sek" "nok" "mxn" "sgd" "hkd" "krw" "try" "rub" "inr" "brl" "zar" "myr" "idr" "thb" "vnd" "php" "egp" "clp" "cop" "ars" "pkr" "bdt")
 
 usage() {
-    echo "Usage: $0 [-h|--help] [-or] [-and] [--run=interval] keyword"
+    echo "Usage: $0 [-h|--help] [-or] [-and] [--run=interval] [-n|--news=number] keyword"
     echo
     echo "Fetches the latest news from different sources using their RSS feeds or APIs and displays them in the terminal."
     echo "Fetches 3 latest news about the given keyword from each API."
@@ -18,12 +18,17 @@ usage() {
     echo "  -or           Use OR operator between keywords."
     echo "  -and          Use AND operator between keywords."
     echo "  --run=interval Run the script at an interval (in seconds)."
+    echo "  -n, --news=number Fetch a specific number of news items."
     echo
     echo "Examples:"
     echo "  $0 bitcoin ethereum -or"
     echo "  $0 bitcoin ethereum -and"
     echo "  $0 bitcoin --run=3600"
+    echo "  $0 bitcoin --news=5"
+    echo "  $0 bitcoin ethereum -or --run=3600 --news=5"
+    echo "  $0 bitcoin ethereum -and --run=3600 --news=5"
 }
+
 
 fetch_alphavantage() {
     local keyword=$1
@@ -65,7 +70,7 @@ fetch_newsapi() {
     echo -e "\e[1mFetching news from \e[0;35mNewsAPI\e[0m...\n"
     echo "QUERY: https://newsapi.org/v2/everything?q=${keyword}&language=en&sortBy=publishedAt&pageSize=3&apiKey=$API_KEY_NEWSAPI_ORG"
     echo
-    curl -s "https://newsapi.org/v2/everything?q=${keyword}&language=en&sortBy=publishedAt&pageSize=3&apiKey=$API_KEY_NEWSAPI_ORG" | jq -r '.articles[] | .title, .url, ""'
+    curl -s "https://newsapi.org/v2/everything?q=${keyword}&language=en&sortBy=publishedAt&pageSize=$news_count&apiKey=$API_KEY_NEWSAPI_ORG" | jq -r '.articles[] | .title, .url, ""'
 }
 
 fetch_gnews() {
@@ -77,12 +82,13 @@ fetch_gnews() {
     echo -e "\e[1mFetching news from \e[0;35mGNews\e[0m...\n"
     echo "QUERY: https://gnews.io/api/v4/search?q=${keyword}&lang=en&max=3&token=$API_KEY_GNEWS"
     echo
-    curl -s "https://gnews.io/api/v4/search?q=${keyword}&lang=en&max=3&token=$API_KEY_GNEWS" | jq -r '.articles[] | .title, .url, ""'
+    curl -s "https://gnews.io/api/v4/search?q=${keyword}&lang=en&max=$news_count&token=$API_KEY_GNEWS" | jq -r '.articles[] | .title, .url, ""'
 }
 
 keywords=()
 operator=""
 interval=""
+news_count=3  # default news count
 
 while (( "$#" )); do
     case "$1" in
@@ -100,6 +106,10 @@ while (( "$#" )); do
             ;;
         --run=*)
             interval="${1#*=}"
+            shift
+            ;;
+        -n|--news=*)
+            news_count="${1#*=}"
             shift
             ;;
         *)
