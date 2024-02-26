@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# Install Tweepy if not already installed
-pip install tweepy
+# Check if Tweepy is already installed
+if ! pip show tweepy > /dev/null; then
+    # Install Tweepy if not already installed
+    pip install tweepy
+fi
 
 # Python script to fetch tweets
 python3 << END
