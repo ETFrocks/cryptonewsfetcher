@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# Check if jq and curl are installed
+if ! command -v jq &> /dev/null
+then
+    echo "jq could not be found. Attempting to install..."
+    sudo apt-get install jq -y
+fi
+
+if ! command -v curl &> /dev/null
+then
+    echo "curl could not be found. Attempting to install..."
+    sudo apt-get install curl -y
+fi
+
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $BASE_DIR/.env
 
