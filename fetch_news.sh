@@ -144,7 +144,19 @@ else
     keyword=${keywords[0]}
 fi
 
+check_internet() {
+    wget -q --spider http://google.com
+
+    if [ $? -eq 0 ]; then
+        echo "Internet connection is available."
+    else
+        echo "No internet connection. Please check your network settings."
+        exit 1
+    fi
+}
+
 while true; do
+    check_internet
     fetch_alphavantage $keyword
     fetch_newsapi $keyword
     fetch_gnews $keyword
