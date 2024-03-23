@@ -21,7 +21,7 @@ declare -A STOCKS_KEYWORDS=(["coinbase"]="coin" ["paypal"]="pypl" ["microsoft"]=
 FOREX_KEYWORDS=("eur" "usd" "jpy" "chf" "gbp" "aud" "cad" "nzd" "sek" "nok" "mxn" "sgd" "hkd" "krw" "try" "rub" "inr" "brl" "zar" "myr" "idr" "thb" "vnd" "php" "egp" "clp" "cop" "ars" "pkr" "bdt")
 
 usage() {
-    echo "Usage: $0 [-h|--help] [-or] [-and] [--run=interval] [-n|--news=number] keyword"
+    echo "Usage: $0 [-h|--help] [-or] [-and] [--run=interval] [-n|--news=number] [-l|--language=language] keyword"
     echo
     echo "Fetches the latest news from different sources using their RSS feeds or APIs and displays them in the terminal."
     echo "Fetches 3 latest news about the given keyword from each API."
@@ -32,6 +32,7 @@ usage() {
     echo "  -and          Use AND operator between keywords."
     echo "  --run=interval Run the script at an interval (in seconds)."
     echo "  -n, --news=number Fetch a specific number of news items."
+    echo "  -l, --language=language Fetch news in a specific language."
     echo
     echo "Examples:"
     echo "  $0 bitcoin ethereum -or"
@@ -40,8 +41,8 @@ usage() {
     echo "  $0 bitcoin --news=5"
     echo "  $0 bitcoin ethereum -or --run=3600 --news=5"
     echo "  $0 bitcoin ethereum -and --run=3600 --news=5"
+    echo "  $0 bitcoin --language=fr"
 }
-
 
 fetch_alphavantage() {
     local keyword=$1
